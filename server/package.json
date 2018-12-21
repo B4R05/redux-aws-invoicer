@@ -1,21 +1,28 @@
 {
-  "name": "unmind_test",
+  "name": "REST-server",
   "version": "1.0.0",
-  "description": "Basic api server for unmind test app",
+  "description": "Basic REST server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --timeout 10000",
     "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "config": "^3.0.1",
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "mongoose": "^5.2.8",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.3",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }
