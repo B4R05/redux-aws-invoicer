@@ -1,20 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import HeaderLink from "./HeaderLink";
 
 const Header = () => {
   return (
     <div className="ui  container segment right aligned ">
-      <Link to="/invoices" className="ui primary basic button  ">
-        Invoices
-      </Link>
-      <Link to="/invoices/new" className="ui primary basic button ">
-        New Invoice
-      </Link>
-      <Link to="/" className="ui primary basic button  ">
-        Dashboard
-      </Link>
+      <HeaderLink to="/invoices" location="Invoices" />
+      <HeaderLink to="/invoices/new" location="New Invoice" />
+      <HeaderLink to="/" location="Dashboard" />
     </div>
   );
 };
 
 export default Header;
+
