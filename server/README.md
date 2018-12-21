@@ -19,6 +19,6 @@
 - Request validation was done manually ('middlewares.js'), node validation libraries that handle this such as 'Joi' could have been used especially if the app scales and becomes more complex.
 
 
-## Test
+## Testing
 - IMPORTANT: I haven't used a test database, any test that is executed will affect the real database!
 - 'npm test'
