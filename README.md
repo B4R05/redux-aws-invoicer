@@ -1,10 +1,10 @@
-# invoicer
+# Invoicer
 
 Create and edit invoices with this simple web app. Built with React, Node, Express and MongoDB.
 
 
 
-# installation 
+# Installation 
 
 For the server side:
 - From your command line, cd into the 'server' folder
