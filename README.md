@@ -2,7 +2,9 @@
 
 Create and edit invoices with this simple web app. Built with React, Node, Express and MongoDB.
 
-
+<video width="320" height="240" controls>
+  <source src="video.mov" type="video/mp4">
+</video>
 
 # Installation 
 
