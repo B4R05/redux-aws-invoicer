@@ -9,7 +9,7 @@ Create and edit invoices with this simple web app. Built with React, Node, Expre
 
 For the server side:
 - From your command line, cd into the 'server' folder
-- Run 'npm install'
+- Run ```'npm install'```
 - After the modules have been installed, run the command 'node server.js' to run the server.
 
 
