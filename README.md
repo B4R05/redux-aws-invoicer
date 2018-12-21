@@ -3,7 +3,7 @@
 Create and edit invoices with this simple web app. Built with React, Node, Express and MongoDB.
 
 
-![](name-of-giphy.gif)
+![](https://github.com/GavBaros/invoicer/blob/master/Dec-21-2018%2021-44-07.gif.sb-2a44b675-OgY82M)
 
 # Installation 
 
