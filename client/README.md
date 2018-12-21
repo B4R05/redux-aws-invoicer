@@ -19,10 +19,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Form Validation
 
-- React form validation libraries such as 'Formik' would have been ideal to use and is more dependable. For the sake of speed, I validated all fields manually.
+- React form validation libraries such as 'Formik' would have been ideal to use than manual validation.
 
 - When creating or updating an invoice, 'Date Paid' can be left blank and cannot accept a future date but only the current date to a date since the last ten years.
 
-# Styling
+## Styling
 
 - Styling was kept to a minimum using Semantic UI.
