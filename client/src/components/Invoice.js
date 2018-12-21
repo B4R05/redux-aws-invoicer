@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Invoice = props => {
-  let { to, date_due, date_paid, description, amount_due, _id } = props.data;
+const Invoice = ({ data }) => {
+  let { to, date_due, date_paid, description, amount_due, _id } = data;
 
   return (
     <tr>
@@ -22,7 +22,7 @@ const Invoice = props => {
         <Link
           to={{
             pathname: `/invoices/${_id}`,
-            props
+            data
           }}
           className="ui primary button"
         >
