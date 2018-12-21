@@ -3,6 +3,8 @@
 Create and edit invoices with this simple web app. Built with React, Node, Express and MongoDB.
 
 
+![](name-of-giphy.gif)
+
 # Installation 
 
 For the server side:
