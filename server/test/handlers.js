@@ -73,13 +73,6 @@ describe("Invoices", () => {
 
   describe("/PATCH", () => {
     it("it should UPDATE an invoice given the id", done => {
-      let invoice = {
-        to_value: "Company X",
-        date_due_value: "12/12/2018",
-        date_paid_value: "",
-        description_value: "Example description",
-        amount_due_value: "1000"
-      };
 
       chai
         .request(server)
