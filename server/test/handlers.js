@@ -73,14 +73,16 @@ describe("Invoices", () => {
 
   describe("/PATCH", () => {
     it("it should UPDATE an invoice given the id", done => {
-
       chai
         .request(server)
         .patch("/invoice")
-        .send({ id: "5c152dc1c44159ea2d3ddef6" })
+        .send({ id: "5c1d0445f4bb30401d580f10", date_paid_value: "12/12/2018" })
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
+          res.body.should.have.property("_id").eql("5c1d0445f4bb30401d580f10");
+          res.body.should.have.property("date_paid").eql("12/12/2018");
+
           done();
         });
     });
