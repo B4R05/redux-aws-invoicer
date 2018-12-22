@@ -1,6 +1,6 @@
 # Invoicer
 
-Create and edit invoices with this simple web app. Built with React, Node, Express and MongoDB.
+Create, list and edit your invoices with this simple web app. Built with React, Node, Express and MongoDB.
 
 
 ![](demo.gif)
