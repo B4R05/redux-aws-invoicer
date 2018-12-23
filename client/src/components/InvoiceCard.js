@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import InvoiceCardHeader from "./InvoiceCardHeader";
 
 const InvoiceCard = ({ data, editDatePaid, renderButtons, showMessage }) => {
   let { to, date_due, description, amount_due } = data;
@@ -10,16 +11,11 @@ const InvoiceCard = ({ data, editDatePaid, renderButtons, showMessage }) => {
         <div className="header">Invoice Details</div>
       </div>
       <div className="content">
-        <h4 className="ui sub header">To</h4>
-        <div className="ui small feed">{to}</div>
-        <h4 className="ui sub header">Date Due</h4>
-        <div className="ui small feed">{date_due}</div>
-        <h4 className="ui sub header">Date Paid</h4>
-        <div className="ui small feed">{editDatePaid()}</div>
-        <h4 className="ui sub header">Description</h4>
-        <div className="ui small feed">{description}</div>
-        <h4 className="ui sub header">Amount Due</h4>
-        <div className="ui small feed">£{amount_due}</div>
+        <InvoiceCardHeader header="To" feed={to} />
+        <InvoiceCardHeader header="Date Due" feed={date_due} />
+        <InvoiceCardHeader header="Date Paid" feed={editDatePaid()} />
+        <InvoiceCardHeader header="Description" feed={description} />
+        <InvoiceCardHeader header="Amount Due" feed={`£${amount_due}`} />
       </div>
       <div className="extra content">{renderButtons()}</div>
       {showMessage()}
@@ -47,8 +43,7 @@ InvoiceCard.defaultProps = {
     date_due: "Due Date unknown",
     date_paid: "Date Paid unknown",
     description: "No description entered",
-    amount_due: "No amount due entered",
-    _id: "No id entered"
+    amount_due: "No amount due entered"
   }
 };
 

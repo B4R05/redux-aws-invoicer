@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import FetchError from "./FetchError";
+import FetchLoading from "./FetchLoading";
 
 class Dashboard extends React.Component {
   state = {
@@ -38,24 +40,25 @@ class Dashboard extends React.Component {
     const { loading, error } = this.state;
 
     if (error) {
+      return <FetchError />;
+    } else if (loading) {
       return (
-        <div className="ui red message">
-          A server error happened and we could not retrieve your invoices.
-          Please refresh this page.
+        <div className="ui container segment">
+          <FetchLoading />
+        </div>
+      );
+    } else {
+      return (
+        <div className="ui container segment">
+          <div className="fade">
+            <h2>Paid Invoices</h2>
+            <h1 style={{ color: "lightgreen" }}>{this.state.paid_invoices}</h1>
+            <h2>Pending Invoices</h2>
+            <h1 style={{ color: "tomato" }}>{this.state.pending_invoices}</h1>
+          </div>
         </div>
       );
     }
-
-    return (
-      <div className={`ui container segment ${loading && "loading"} `}>
-        <div className="fade">
-          <h2>Paid Invoices</h2>
-          <h1 style={{ color: "lightgreen" }}>{this.state.paid_invoices}</h1>
-          <h2>Pending Invoices</h2>
-          <h1 style={{ color: "tomato" }}>{this.state.pending_invoices}</h1>
-        </div>
-      </div>
-    );
   };
 
   render() {

@@ -1,6 +1,9 @@
 import React from "react";
 import Invoice from "./Invoice";
 import axios from "axios";
+import FetchError from "./FetchError";
+import FetchLoading from "./FetchLoading";
+import InvoiceListIcon from "./InvoiceListIcon";
 
 class InvoiceList extends React.Component {
   state = {
@@ -23,23 +26,11 @@ class InvoiceList extends React.Component {
     let { error, loading } = this.state;
 
     if (error) {
-      return (
-        <div className="ui red message">
-          A server error happened and we could not retrieve your invoices.
-          Please refresh this page.
-        </div>
-      );
+      return <FetchError />;
     }
 
     if (loading) {
-      return (
-        <div className="ui icon message">
-          <i className="notched circle loading icon" />
-          <div className="content">
-            <div className="header">Fetching your invoices..</div>
-          </div>
-        </div>
-      );
+      return <FetchLoading />;
     }
   };
 
@@ -83,12 +74,9 @@ class InvoiceList extends React.Component {
               <th>Amount Due</th>
               <th>
                 Status
-                <i
-                  onClick={this.toggleSort}
-                  className={`angle ${
-                    current_sort === "paid_first" ? "down" : "up"
-                  } icon`}
-                  style={{ cursor: "pointer", marginLeft: "2%" }}
+                <InvoiceListIcon
+                  toggleSort={this.toggleSort}
+                  currentSort={current_sort}
                 />
               </th>
               <th>Edit Invoice</th>

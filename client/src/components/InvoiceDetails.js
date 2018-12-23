@@ -131,6 +131,7 @@ class InvoiceDetails extends React.Component {
       return (
         <span>
           <button
+            id="save"
             className={`ui ${
               loading ? "loading gray" : invalid_date ? "disabled" : "green"
             } button`}
