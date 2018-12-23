@@ -19,4 +19,5 @@ For the client side:
 - Run ```'npm start'``` to run the app.
 - IMPORTANT: Only run the app on ```'localhost:3000'``` as the backend will only accept requests from that point
 
-
+# Tests
+- For both the client and server side tests, run ```'npm test'``` while your terminal is inside each
