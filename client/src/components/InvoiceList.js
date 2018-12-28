@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Table } from "semantic-ui-react";
 import Invoice from "./Invoice";
 import axios from "axios";
 import FetchError from "./FetchError";
@@ -63,29 +64,30 @@ class InvoiceList extends React.Component {
     let { current_sort } = this.state;
 
     return (
-      <div className="ui container fade ">
-        <table className="ui fixed celled table fade">
-          <thead>
-            <tr>
-              <th>To</th>
-              <th>Date Due</th>
-              <th>Date Paid</th>
-              <th>Description</th>
-              <th>Amount Due</th>
-              <th>
+      <Container className="fade">
+        <Table celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>To</Table.HeaderCell>
+              <Table.HeaderCell>Date Due</Table.HeaderCell>
+              <Table.HeaderCell>Date Paid</Table.HeaderCell>
+              <Table.HeaderCell>Description</Table.HeaderCell>
+              <Table.HeaderCell>Amount Due</Table.HeaderCell>
+              <Table.HeaderCell>
                 Status
                 <InvoiceListIcon
                   toggleSort={this.toggleSort}
                   currentSort={current_sort}
                 />
-              </th>
-              <th>Edit Invoice</th>
-            </tr>
-          </thead>
-          <tbody>{this.renderInvoices()}</tbody>
-        </table>
+              </Table.HeaderCell>
+              <Table.HeaderCell>Edit Invoice</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>{this.renderInvoices()}</Table.Body>
+        </Table>
+
         {this.showMessage()}
-      </div>
+      </Container>
     );
   }
 }

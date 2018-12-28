@@ -1,11 +1,14 @@
 import React from "react";
+import { Header, Feed } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 const InvoiceCardHeader = ({ header, feed }) => {
   return (
     <React.Fragment>
-      <h4 className="ui sub header">{header}</h4>
-      <div className="ui small feed">{feed}</div>
+      <Header as="h4" sub>
+        {header}
+      </Header>
+      <Feed size="small">{feed}</Feed>
     </React.Fragment>
   );
 };

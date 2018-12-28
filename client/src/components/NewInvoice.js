@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Message } from "semantic-ui-react";
 import NewInvoiceForm from "./NewInvoiceForm";
 
 class NewInvoice extends React.Component {
@@ -38,29 +39,27 @@ class NewInvoice extends React.Component {
 
     if (server_error) {
       return (
-        <div className="ui red message">
+        <Message negative>
           A server error happened and we could not create a new invoice, please
           submit the form again.
-        </div>
+        </Message>
       );
     } else if (server_error === false) {
       return (
-        <div className="ui green message">
-          A new invoice was successfully created. You can now see it on your
-          invoice list page.
-        </div>
+        <Message positive>
+          Invoice successfully created. You can now see it on your invoice list
+          page.
+        </Message>
       );
     }
 
     if (form_error) {
-      return (
-        <div className="ui red message">Please fix the fields in red. </div>
-      );
+      return <Message negative>Please fix the fields in red.</Message>;
     }
   };
 
-  handleAmountDue = e => {
-    this.setState({ amount_due_value: e.target.value }, () => {
+  handleAmountDue = event => {
+    this.setState({ amount_due_value: event.target.value }, () => {
       if (this.state.amount_due_value === "") {
         this.setState({ invalid_amount_due: true });
       } else {

@@ -1,10 +1,11 @@
 import React from "react";
+import { Icon } from "semantic-ui-react";
 
 const InvoiceListIcon = ({ toggleSort, currentSort }) => {
   return (
-    <i
+    <Icon
       onClick={toggleSort}
-      className={`angle ${currentSort === "paid_first" ? "down" : "up"} icon`}
+      name={`angle ${currentSort === "paid_first" ? "down" : "up"} icon`}
       style={{ cursor: "pointer", marginLeft: "2%" }}
     />
   );

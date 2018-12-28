@@ -1,11 +1,12 @@
 import React from "react";
+import { Message } from "semantic-ui-react";
 
 const FetchError = () => {
   return (
-    <div className="ui red message">
+    <Message color="red">
       A server error happened and we could not retrieve your invoices. Please
       refresh this page.
-    </div>
+    </Message>
   );
 };
 

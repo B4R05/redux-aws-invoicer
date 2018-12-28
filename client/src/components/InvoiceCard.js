@@ -1,4 +1,5 @@
 import React from "react";
+import { Card } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import InvoiceCardHeader from "./InvoiceCardHeader";
 
@@ -6,20 +7,20 @@ const InvoiceCard = ({ data, editDatePaid, renderButtons, showMessage }) => {
   let { to, date_due, description, amount_due } = data;
 
   return (
-    <div className="ui card fade">
-      <div className="content">
-        <div className="header">Invoice Details</div>
-      </div>
-      <div className="content">
+    <Card className="fade">
+      <Card.Content>
+        <Card.Header>Invoice Details</Card.Header>
+      </Card.Content>
+      <Card.Content>
         <InvoiceCardHeader header="To" feed={to} />
         <InvoiceCardHeader header="Date Due" feed={date_due} />
         <InvoiceCardHeader header="Date Paid" feed={editDatePaid()} />
         <InvoiceCardHeader header="Description" feed={description} />
         <InvoiceCardHeader header="Amount Due" feed={`£${amount_due}`} />
-      </div>
-      <div className="extra content">{renderButtons()}</div>
+      </Card.Content>
+      <Card.Content extra>{renderButtons()}</Card.Content>
       {showMessage()}
-    </div>
+    </Card>
   );
 };
 

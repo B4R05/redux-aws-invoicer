@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Container, Input, Message, Button } from "semantic-ui-react";
 import InvoiceCard from "./InvoiceCard";
 import PropTypes from "prop-types";
 
@@ -65,7 +66,7 @@ class InvoiceDetails extends React.Component {
 
     if (edit_mode) {
       return (
-        <input
+        <Input
           type="date"
           min="2008-01-01"
           max="2098-12-31"
@@ -88,22 +89,22 @@ class InvoiceDetails extends React.Component {
 
     if (server_error) {
       return (
-        <div className="ui red message">
+        <Message negative>
           A server error happened and we could not update your invoice, please
           try again.
-        </div>
+        </Message>
       );
     } else if (server_error === false && !invalid_date && !edit_mode) {
-      return (
-        <div className="ui green message">Invoice successfully updated.</div>
-      );
+      return <Message positive>Invoice successfully updated.</Message>;
     }
 
     if (invalid_date) {
       return (
-        <div className="ui warning message">
-          Please either leave blank or select from today's date or earlier.
-        </div>
+        <Message
+          warning
+          header="Cannot accept a future date!"
+          content="Please either leave blank or select from today's date or earlier."
+        />
       );
     }
   };
@@ -123,23 +124,20 @@ class InvoiceDetails extends React.Component {
 
     if (edit_mode === false) {
       return (
-        <button className="ui button primary" onClick={this.handleEditMode}>
+        <Button primary onClick={this.handleEditMode}>
           Edit Date Paid
-        </button>
+        </Button>
       );
     } else {
       return (
-        <span>
-          <button
-            id="save"
-            className={`ui ${
-              loading ? "loading gray" : invalid_date ? "disabled" : "green"
-            } button`}
-            onClick={this.handleSave}
-          >
-            Save
-          </button>
-        </span>
+        <Button
+          color="green"
+          loading={loading ? true : false}
+          disabled={invalid_date ? true : false}
+          onClick={this.handleSave}
+        >
+          Save
+        </Button>
       );
     }
   };
@@ -160,7 +158,7 @@ class InvoiceDetails extends React.Component {
   };
 
   render() {
-    return <div className="ui container">{this.renderCard()}</div>;
+    return <Container>{this.renderCard()}</Container>;
   }
 }
 

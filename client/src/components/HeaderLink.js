@@ -1,12 +1,13 @@
 import React from "react";
+import { Menu, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const HeaderLink = ({ to, location }) => {
   return (
-    <Link to={to} className="ui primary basic button ">
+    <Button as={Link} to={to}>
       {location}
-    </Link>
+    </Button>
   );
 };
 

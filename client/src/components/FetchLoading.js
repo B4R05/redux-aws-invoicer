@@ -1,13 +1,14 @@
 import React from "react";
+import { Message, Icon } from "semantic-ui-react";
 
 const FetchLoading = () => {
   return (
-    <div className="ui icon message">
-      <i className="notched circle loading icon" />
-      <div className="content">
-        <div className="header">Fetching your invoices..</div>
-      </div>
-    </div>
+    <Message icon>
+      <Icon name="circle notched" loading />
+      <Message.Content>
+        <Message.Header> Fetching your invoices...</Message.Header>
+      </Message.Content>
+    </Message>
   );
 };
 

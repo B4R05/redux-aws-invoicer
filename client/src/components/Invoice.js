@@ -1,4 +1,5 @@
 import React from "react";
+import { Table, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -6,30 +7,32 @@ const Invoice = ({ data }) => {
   let { to, date_due, date_paid, description, amount_due, _id } = data;
 
   return (
-    <tr>
-      <td data-label="To">{to}</td>
-      <td data-label="Date Due">{date_due}</td>
-      <td data-label="Date Paid">{date_paid === "" ? "-" : date_paid}</td>
-      <td data-label="Description">{description}</td>
-      <td data-label="Amount Due">£{amount_due}</td>
-      <td
-        data-label="Status"
-        className={date_paid === "" ? "negative" : "positive"}
-      >
-        <strong>{date_paid === "" ? "Pending" : "Paid"}</strong>
-      </td>
-      <td data-label="Edit Invoice">
+    <Table.Row>
+      <Table.Cell>{to}</Table.Cell>
+      <Table.Cell>{date_due}</Table.Cell>
+      <Table.Cell>{date_paid === "" ? "-" : date_paid}</Table.Cell>
+      <Table.Cell>{description}</Table.Cell>
+      <Table.Cell>£{amount_due}</Table.Cell>
+      {date_paid === "" ? (
+        <Table.Cell negative>
+          <strong>Pending</strong>
+        </Table.Cell>
+      ) : (
+        <Table.Cell positive>
+          <strong>Paid</strong>
+        </Table.Cell>
+      )}
+      <Table.Cell>
         <Link
           to={{
             pathname: `/invoices/${_id}`,
             data
           }}
-          className="ui primary button"
         >
-          View
+          <Button primary> View</Button>
         </Link>
-      </td>
-    </tr>
+      </Table.Cell>
+    </Table.Row>
   );
 };
 

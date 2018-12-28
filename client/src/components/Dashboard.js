@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import FetchError from "./FetchError";
 import FetchLoading from "./FetchLoading";
+import { Container, Segment, Header } from "semantic-ui-react";
 
 class Dashboard extends React.Component {
   state = {
@@ -43,20 +44,26 @@ class Dashboard extends React.Component {
       return <FetchError />;
     } else if (loading) {
       return (
-        <div className="ui container segment">
-          <FetchLoading />
-        </div>
+        <Container>
+          <Segment>
+            <FetchLoading />
+          </Segment>
+        </Container>
       );
     } else {
       return (
-        <div className="ui container segment">
-          <div className="fade">
-            <h2>Paid Invoices</h2>
-            <h1 style={{ color: "lightgreen" }}>{this.state.paid_invoices}</h1>
-            <h2>Pending Invoices</h2>
-            <h1 style={{ color: "tomato" }}>{this.state.pending_invoices}</h1>
-          </div>
-        </div>
+        <Container>
+          <Segment className="fade">
+            <Header as="h2">Paid Invoices</Header>
+            <Header as="h1" color="green">
+              {this.state.paid_invoices}
+            </Header>
+            <Header as="h2">Pending Invoices</Header>
+            <Header as="h1" color="red">
+              {this.state.pending_invoices}
+            </Header>
+          </Segment>
+        </Container>
       );
     }
   };

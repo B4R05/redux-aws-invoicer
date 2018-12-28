@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Segment, Header, Form, Button } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 const NewInvoiceForm = ({
@@ -26,68 +27,73 @@ const NewInvoiceForm = ({
   } = parentState;
 
   return (
-    <div className="ui container segment fade very padded">
-      <h2 className="ui header center aligned">New Invoice</h2>
-      <form className="ui form" onSubmit={assess}>
-        <div className={`field ${to_error && "error"}`}>
-          <label>To:</label>
-          <input
-            type="text"
-            placeholder="Enter the name of the customer"
-            value={to_value}
-            onChange={textInput}
-          />
-        </div>
-        <div className={`field ${invalid_date_due_value && "error"}`}>
-          <label>Date Due:</label>
-          <input
-            type="date"
-            min="2008-01-01"
-            max="2098-12-31"
-            placeholder="Enter the date the invoice should be paid"
-            value={date_due_value}
-            onChange={dateDue}
-          />
-        </div>
-        <div className={`field ${invalid_date_paid_value && "error"}`}>
-          <label>Date Paid:</label>
-          <input
-            type="date"
-            min="2008-01-01"
-            max="2098-12-31"
-            placeholder="Enter the date the invoice was paid"
-            value={date_paid_value}
-            onChange={datePaid}
-          />
-        </div>
-        <div className={`field ${description_error && "error"}`}>
-          <label>Description:</label>
-          <textarea
-            rows="2"
-            placeholder="Add a description of the service the invoice is for"
-            value={description_value}
-            onChange={textArea}
-          />
-        </div>
-        <div className={`field ${invalid_amount_due && "error"}`}>
-          <label>Amount due GBP:</label>
-          <input
-            type="text"
-            maxLength="7"
-            placeholder="Enter the invoice value"
-            value={isNaN(amount_due_value) ? "" : amount_due_value}
-            onChange={amountDue}
-          />
-        </div>
-        <button
-          className={`ui basic ${loading ? "loading" : ""} button`}
-          type="submit"
-        >
-          Submit
-        </button>
-      </form>
-      {showMessage()}
-    </div>
+    <Container className="fade">
+      <Segment>
+        <Header as="h2" textAlign="center">
+          New Invoice
+        </Header>
+        <Form onSubmit={assess}>
+          <Form.Field error={to_error && true}>
+            <Form.Input
+              label="To:"
+              type="text"
+              placeholder="Enter the name of the customer"
+              value={to_value}
+              onChange={textInput}
+            />
+          </Form.Field>
+
+          <Form.Field error={invalid_date_due_value && true}>
+            <Form.Input
+              label="Date Due:"
+              type="date"
+              min="2008-01-01"
+              max="2098-12-31"
+              placeholder="Enter the date the invoice should be paid"
+              value={date_due_value}
+              onChange={dateDue}
+            />
+          </Form.Field>
+
+          <Form.Field error={invalid_date_paid_value && true}>
+            <Form.Input
+              label="Date Paid:"
+              type="date"
+              min="2008-01-01"
+              max="2098-12-31"
+              placeholder="Enter the date the invoice was paid"
+              value={date_paid_value}
+              onChange={datePaid}
+            />
+          </Form.Field>
+
+          <Form.Field error={description_error && true}>
+            <Form.TextArea
+              label="Description:"
+              placeholder="Add a description of the service the invoice is for"
+              value={description_value}
+              onChange={textArea}
+            />
+          </Form.Field>
+
+          <Form.Field error={invalid_amount_due && true}>
+            <Form.Input
+              label="Amount due GBP:"
+              type="text"
+              maxLength="7"
+              placeholder="Enter the invoice value"
+              value={isNaN(amount_due_value) ? "" : amount_due_value}
+              onChange={amountDue}
+            />
+          </Form.Field>
+
+          <Button basic loading={loading && true} type="submit">
+            Submit
+          </Button>
+        </Form>
+        {showMessage()}
+      </Segment>
+    </Container>
   );
 };
 
