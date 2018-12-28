@@ -4,7 +4,7 @@ Create, list and edit your invoices with this simple web app. Built with React, 
 
 # Demo
 
-![](demo.gif)
+![](invoicer.gif)
 
 # Installation 
 
