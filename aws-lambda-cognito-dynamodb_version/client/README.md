@@ -1,3 +1,0 @@
-## AWS version
-
-coming soon
