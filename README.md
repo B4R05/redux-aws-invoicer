@@ -1,3 +1,6 @@
+# (entire backend currently being migrated to AWS, mongo-express-node files will be deleted)
+
+
 # Invoicer
 
 Create, list and edit your invoices with this simple web app. Built with React, Node, Express and MongoDB.
