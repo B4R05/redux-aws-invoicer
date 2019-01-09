@@ -1,4 +1,4 @@
-# (entire backend currently being migrated to AWS, mongo-express-node files will be deleted)
+# (entire backend currently being migrated to AWS, mongo-express-node filebes are being deleted)
 
 
 # Invoicer
