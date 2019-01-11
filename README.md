@@ -5,6 +5,10 @@
 
 Create, list and edit your invoices with this simple web app. 
 
+# Demo
+
+https://invoicer-c6c19.firebaseapp.com
+
 # Preview
 
 ![](demo.gif)
