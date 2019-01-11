@@ -1,4 +1,4 @@
-# (NOTE: New features are continuously being added)
+# (NOTE: New features are being added)
 
 
 # Invoicer
