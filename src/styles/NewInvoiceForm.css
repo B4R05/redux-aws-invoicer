@@ -1,0 +1,36 @@
+label {
+  color: darkgray !important;
+}
+
+input,
+textarea {
+  background: #1f1f1f !important;
+  color: gray !important;
+  border-color: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: dimgray !important;
+}
+
+#newinvoice-form {
+  margin: auto;
+  width: 450px;
+  padding: 45px;
+}
+
+.ui.form input[type="number"] {
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.react-date-picker__inputGroup__divider {
+  padding: 1px 0;
+  color: gray;
+}
+
+.react-date-picker__calendar {
+  color: black;
+  z-index: 1;
+}

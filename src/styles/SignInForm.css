@@ -1,0 +1,9 @@
+.signin-form input {
+  color: lightgray !important;
+}
+
+.signin-form {
+  margin: 15vh auto !important;
+  width: 450px;
+  padding: 45px !important;
+}

@@ -1,0 +1,80 @@
+body {
+  background: #1f1f1f;
+  font-family: Muli;
+}
+
+.ui.inverted.red.button,
+.ui.inverted.teal.button,
+.ui.inverted.green.button,
+.ui.inverted.grey.button,
+.ui.inverted.yellow.button,
+.ui.inverted.purple.button {
+  box-shadow: 0 0 0 1px !important;
+  border-radius: 0px;
+  transition: 0.2s;
+  animation: 2s fade ease;
+}
+
+.ui.blue.button {
+  box-shadow: 0px 0px 40px -10px rgba(228, 220, 28, 1) !important;
+  border-radius: 0px;
+  color: #1b1b1b;
+  background-color: yellowgreen;
+}
+
+.ui.blue.button:hover {
+  background-color: transparent;
+}
+.ui.table td.positive,
+.ui.table tr.positive {
+  background: springgreen !important;
+  box-shadow: 10px 10px 53px -2px rgba(58, 128, 0, 1);
+  transition: 0.2s;
+}
+
+.ui.celled.table td.positive {
+  color: green !important;
+}
+.ui.celled.table td.negative {
+  color: darkred !important;
+}
+
+.ui.table td.negative,
+.ui.table tr.negative {
+  box-shadow: 10px 10px 53px -2px rgba(128, 0, 17, 1);
+  background: tomato !important;
+  transition: 0.2s;
+}
+
+.ui.celled.table tr td {
+  background: #1b1c1d;
+  border-color: #222 !important;
+}
+
+.ui.celled.table .negative,
+.ui.celled.table .positive {
+  border-color: transparent !important;
+}
+
+.ui.celled.table tr th {
+  background: #111111 !important;
+  color: darkgray !important;
+}
+
+.ui.celled.table tr td {
+  color: gray !important;
+}
+
+.fade {
+  animation: 0.5s fade ease;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
