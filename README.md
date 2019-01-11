@@ -1,4 +1,4 @@
-# (NOTE: entire backend has migrated to AWS, mongo-express-node files are being deleted, styling being revamped and further updates being made. Ignore the rest of this README. Also feel free to use this project you wish!)
+# (NOTE: entire backend has migrated to AWS, mongo-express-node files are being deleted, styling being revamped and further updates being made.)
 
 
 # Invoicer
