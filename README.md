@@ -1,4 +1,4 @@
-# (NOTE: New features are being added and the invoicing backend and frontend system are undergoing a major restructuring)
+# (NOTE: New features are being added and the invoicing backend and frontend system are undergoing a major restructuring, the demo and preview show an outdated version and will be updated soon)
 
 
 # Invoicer
