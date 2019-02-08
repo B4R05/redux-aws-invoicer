@@ -4,7 +4,7 @@
 
 > More features to be added
 
-> This is a practice project for me, feel free to use it as you wish
+> This is a practice project for me, feel free to use it as you wish :v:
 
 ![](https://img.shields.io/github/last-commit/GavBaros/redux-aws-invoicer.svg?style=flat)
 ![](https://img.shields.io/github/repo-size/GavBaros/redux-aws-invoicer.svg?style=flat)
