@@ -3,7 +3,7 @@ import { userPool } from "../../config";
 import SignUpFormStep1 from "./SignUpFormStep1";
 import SignUpFormStep2 from "./SignUpFormStep2";
 
-import "../../styles/SignUpForm.css";
+import "../../styles/SignForm.css";
 import { Container } from "semantic-ui-react";
 
 class SignUpForm extends React.Component {
@@ -18,12 +18,12 @@ class SignUpForm extends React.Component {
     }
   }
 
-  handleSuccess = arg => {
-    this.setState({ stepOneSuccess: arg });
+  handleSuccess = value => {
+    this.setState({ stepOneSuccess: value });
   };
 
-  handlePassword = arg => {
-    this.setState({ password: arg });
+  handlePassword = value => {
+    this.setState({ password: value });
   };
 
   renderForms = () => {

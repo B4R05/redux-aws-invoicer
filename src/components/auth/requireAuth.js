@@ -1,12 +1,14 @@
 import React from "react";
-import { userPool } from "../../config";
+import { connect } from "react-redux";
 
 const requireAuth = WrappedComponent => {
   class HOC extends React.Component {
     state = { isAuth: null };
 
+    //is the user logged in? grant access to component, else prompt to sign in page
     componentDidMount() {
-      if (!userPool.getCurrentUser()) {
+      if (this.props.token === "") {
+        console.log(this.props);
         this.setState({ isAuth: false });
         this.props.history.push("/signin");
       } else {
@@ -16,7 +18,7 @@ const requireAuth = WrappedComponent => {
 
     renderComponent() {
       if (this.state.isAuth) {
-        return <WrappedComponent isAuth={this.state.isAuth} />;
+        return <WrappedComponent {...this.props} isAuth={this.state.isAuth} />;
       }
     }
 
@@ -25,6 +27,13 @@ const requireAuth = WrappedComponent => {
     }
   }
 
-  return HOC;
+  return connect(mapStateToProps)(HOC);
 };
+
+const mapStateToProps = state => {
+  return {
+    token: state.authToken
+  };
+};
+
 export default requireAuth;

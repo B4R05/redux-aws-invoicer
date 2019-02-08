@@ -1,15 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Table, Button } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { selectedInvoice } from "../../actions/index";
 
-const Invoice = ({ data }) => {
-  let { to, date_due, date_paid, description, amount_due, id } = data;
+const Invoice = props => {
+  let { from, to, orderStatus, TotalCost, InvoiceID } = props.data;
 
   return (
     <Table.Row className="fade">
-      <Table.Cell>{to}</Table.Cell>
-      {date_paid === "-" ? (
+      <Table.Cell>{InvoiceID}</Table.Cell>
+      {orderStatus === "Pending" ? (
         <Table.Cell negative>
           <strong>Pending</strong>
         </Table.Cell>
@@ -18,18 +20,17 @@ const Invoice = ({ data }) => {
           <strong>Paid</strong>
         </Table.Cell>
       )}
-      <Table.Cell>{date_due}</Table.Cell>
-      <Table.Cell>{date_paid}</Table.Cell>
-      <Table.Cell>{description}</Table.Cell>
+      <Table.Cell>{from}</Table.Cell>
+      <Table.Cell>{to}</Table.Cell>
       <Table.Cell>
-        <strong>£{amount_due}</strong>
+        <strong>£{TotalCost}</strong>
       </Table.Cell>
 
       <Table.Cell>
         <Link
-          to={{
-            pathname: `/invoices/${id}`,
-            data
+          to={{ pathname: `/invoices/edit/${InvoiceID}` }}
+          onClick={() => {
+            props.selectedInvoice(InvoiceID);
           }}
         >
           <Button color="blue">View</Button>
@@ -40,25 +41,11 @@ const Invoice = ({ data }) => {
 };
 
 Invoice.propTypes = {
-  data: PropTypes.shape({
-    to: PropTypes.string.isRequired,
-    date_due: PropTypes.string.isRequired,
-    date_paid: PropTypes.string,
-    description: PropTypes.string.isRequired,
-    amount_due: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired
-  })
+  selectedInvoice: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired
 };
 
-Invoice.defaultProps = {
-  data: {
-    to: "Unknown company",
-    date_due: "Due Date unknown",
-    date_paid: "Date Paid unknown",
-    description: "No description entered",
-    amount_due: "No amount due entered",
-    id: "No id entered"
-  }
-};
-
-export default Invoice;
+export default connect(
+  null,
+  { selectedInvoice }
+)(withRouter(Invoice));

@@ -94,23 +94,30 @@ class SignUpFormStep1 extends React.Component {
       attrList.push(new CognitoUserAttribute(emailAttribute));
       userPool.signUp(username, password, attrList, null, (err, result) => {
         if (err) {
-          console.log(err);
-          this.props.success(false);
-          this.setState({ loading: false, error: err.message });
-          return;
+          return this.handleSignUpError(err);
         } else {
-          this.setState({ loading: false });
-          this.props.success(true);
+          return this.handleSignUpSuccess();
         }
       });
     }
+  };
+
+  handleSignUpError = err => {
+    console.log(err);
+    this.props.success(false);
+    this.setState({ loading: false, error: err.message });
+  };
+
+  handleSignUpSuccess = () => {
+    this.setState({ loading: false });
+    this.props.success(true);
   };
 
   render() {
     const { loading } = this.state;
 
     return (
-      <Segment inverted className="signup-form fade">
+      <Segment inverted className="sign-form fade">
         <Header as="h2" textAlign="center">
           Sign Up
         </Header>

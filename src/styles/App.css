@@ -1,25 +1,62 @@
 body {
   background: #1f1f1f;
-  font-family: Muli;
+  font-family: Muli, sans-serif !important;
 }
 
-.ui.inverted.red.button,
-.ui.inverted.teal.button,
-.ui.inverted.green.button,
-.ui.inverted.grey.button,
-.ui.inverted.yellow.button,
-.ui.inverted.purple.button {
-  box-shadow: 0 0 0 1px !important;
+h5,
+h2,
+h1,
+span {
+  font-family: Muli, sans-serif !important;
+  margin-top: 10px !important;
+}
+
+h2 {
+  color: whitesmoke !important;
+}
+
+h5 {
+  color: #666 !important;
+}
+
+input,
+button {
+  border-radius: 2px !important;
+}
+
+input {
+  background: black !important;
+  color: #9f9f9f !important;
+}
+
+.ui.icon.button,
+.ui.icon.buttons .button {
+  background: black !important;
+  color: white;
+}
+
+.ui.form .field.error input[type="text"] {
+  border-color: indianred !important;
+}
+
+.ui.red.button,
+.ui.primary.button,
+.ui.teal.button,
+.ui.green.button,
+.ui.grey.button,
+.ui.yellow.button,
+.ui.purple.button {
+  box-shadow: 0 0 0 0px !important;
   border-radius: 0px;
   transition: 0.2s;
   animation: 2s fade ease;
+  color: black;
 }
 
 .ui.blue.button {
-  box-shadow: 0px 0px 40px -10px rgba(228, 220, 28, 1) !important;
   border-radius: 0px;
-  color: #1b1b1b;
-  background-color: yellowgreen;
+  color: darkgray;
+  background-color: #111111;
 }
 
 .ui.blue.button:hover {

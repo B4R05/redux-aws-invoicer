@@ -1,57 +1,62 @@
 import React from "react";
-import axios from "axios";
+import { connect } from "react-redux";
+import { Container, Segment, Header } from "semantic-ui-react";
+import { fetchInvoices, initialise } from "../../actions/index";
 import FetchError from "../spinners/FetchError";
 import FetchLoading from "../spinners/FetchLoading";
-import { Container, Segment, Header } from "semantic-ui-react";
-import { userPool } from "../../config";
 
 class Dashboard extends React.Component {
   state = {
-    invoices: [],
     paid_invoices: "",
     pending_invoices: "",
     loading: true,
     error: false
   };
 
-  componentDidMount() {
-    userPool.getCurrentUser().getSession((err, session) => {
-      if (err) {
-        console.log(err);
-      } else {
-        axios
-          .get(
-            " https://nyrsgtmoql.execute-api.us-east-1.amazonaws.com/prod/invoice",
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: session.getIdToken().getJwtToken()
-              }
-            }
-          )
-          .then(response => {
-            const invoices_pending = response.data.filter(
-              invoice => invoice.date_paid === "-"
-            ).length;
+  //fetches invoices
+  async componentDidMount() {
+    const token = await this.props.token;
 
-            const invoices_paid = response.data.filter(
-              invoice => invoice.date_paid !== "-"
-            ).length;
-
-            this.setState({
-              paid_invoices: invoices_paid,
-              pending_invoices: invoices_pending,
-              loading: false,
-              error: false
-            });
-          })
-          .catch(err => {
-            this.setState({ loading: false, error: true });
-            console.log(err);
-          });
-      }
-    });
+    if (token.length) {
+      return this.props.fetchInvoices(this.props.token);
+    }
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps) {
+      if (!this.props.response) {
+        return this.handleError();
+      }
+      return this.handleResponse();
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.initialise([]);
+  }
+
+  //find paid and unpaid invoices
+  handleResponse = () => {
+    console.log(this.props.fetchedInvoices);
+    const invoices_pending = this.props.response.filter(
+      invoice => invoice.orderStatus === "Pending"
+    ).length;
+
+    const invoices_paid = this.props.response.filter(
+      invoice => invoice.orderStatus === "Paid"
+    ).length;
+
+    this.setState({
+      paid_invoices: invoices_paid,
+      pending_invoices: invoices_pending,
+      loading: false,
+      error: false
+    });
+  };
+
+  handleError = () => {
+    this.setState({ loading: false, error: true });
+  };
 
   showContent = () => {
     const { loading, error } = this.state;
@@ -59,29 +64,37 @@ class Dashboard extends React.Component {
     if (error) {
       return <FetchError />;
     } else if (loading) {
-      return (
-        <Container>
-          <Segment inverted>
-            <FetchLoading />
-          </Segment>
-        </Container>
-      );
+      return this.showLoading();
     } else {
-      return (
-        <Container>
-          <Segment inverted className="fade">
-            <Header as="h2">Paid Invoices</Header>
-            <Header as="h1" color="green">
-              {this.state.paid_invoices}
-            </Header>
-            <Header as="h2">Pending Invoices</Header>
-            <Header as="h1" color="red">
-              {this.state.pending_invoices}
-            </Header>
-          </Segment>
-        </Container>
-      );
+      return this.showStatusOfInvoices();
     }
+  };
+
+  showLoading = () => {
+    return (
+      <Container>
+        <Segment inverted>
+          <FetchLoading />
+        </Segment>
+      </Container>
+    );
+  };
+
+  showStatusOfInvoices = () => {
+    return (
+      <Container>
+        <Segment inverted className="fade">
+          <Header as="h2">Paid Invoices</Header>
+          <Header as="h1" color="green">
+            {this.state.paid_invoices}
+          </Header>
+          <Header as="h2">Pending Invoices</Header>
+          <Header as="h1" color="red">
+            {this.state.pending_invoices}
+          </Header>
+        </Segment>
+      </Container>
+    );
   };
 
   render() {
@@ -89,4 +102,14 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => {
+  return {
+    token: state.authToken,
+    response: state.invoices.invoices
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchInvoices, initialise }
+)(Dashboard);

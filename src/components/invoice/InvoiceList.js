@@ -1,47 +1,48 @@
 import React from "react";
-import { Container, Table } from "semantic-ui-react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Container, Table, Icon } from "semantic-ui-react";
+import { initialise, fetchInvoices } from "../../actions/index";
 import Invoice from "./Invoice";
-import axios from "axios";
 import FetchError from "../spinners/FetchError";
 import FetchLoading from "../spinners/FetchLoading";
-import InvoiceListIcon from "./InvoiceListIcon";
-import { userPool } from "../../config";
 
 class InvoiceList extends React.Component {
   state = {
-    invoices: [],
     loading: true,
     current_sort: "paid_first"
   };
 
-  componentDidMount() {
-    userPool.getCurrentUser().getSession((err, session) => {
-      if (err) {
-        console.log(err);
-      } else {
-        axios
-          .get(
-            " https://nyrsgtmoql.execute-api.us-east-1.amazonaws.com/prod/invoice",
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: session.getIdToken().getJwtToken()
-              }
-            }
-          )
-          .then(res => {
-            this.setState({
-              invoices: res.data,
-              loading: false,
-              error: false
-            });
-          })
-          .catch(err => {
-            this.setState({ loading: false, error: true });
-            console.log(err);
-          });
+  async componentDidMount() {
+    const token = await this.props.token;
+
+    if (token.length) {
+      return this.props.fetchInvoices(this.props.token);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps) {
+      if (!this.props.response) {
+        return this.handleError();
       }
+      return this.handleResponse();
+    }
+  }
+
+  handleResponse = () => {
+    this.setState({
+      loading: false,
+      error: false
     });
+  };
+
+  handleError = () => {
+    this.setState({ loading: false, error: true });
+  };
+
+  componentWillUnmount() {
+    this.props.initialise([]);
   }
 
   showMessage = () => {
@@ -57,14 +58,15 @@ class InvoiceList extends React.Component {
   };
 
   renderInvoices = () => {
-    let { invoices, current_sort } = this.state;
+    let { current_sort } = this.state;
 
-    return invoices
+    return this.props.response
       .sort((a, b) => {
         if (current_sort === "paid_first") {
-          return (a.date_paid === "-") - (b.date_paid === "-");
+          return (b.orderStatus === "Pending") - (a.orderStatus === "Pending");
+        } else {
+          return (b.orderStatus === "Paid") - (a.orderStatus === "Paid");
         }
-        return (b.date_paid === "-") - (a.date_paid === "-");
       })
       .map((invoice, key) => {
         return <Invoice key={key} data={invoice} />;
@@ -73,7 +75,6 @@ class InvoiceList extends React.Component {
 
   toggleSort = () => {
     let { current_sort } = this.state;
-
     if (current_sort === "paid_first") {
       this.setState({ current_sort: "pending_first" });
     } else {
@@ -89,18 +90,20 @@ class InvoiceList extends React.Component {
         <Table celled inverted className="fade">
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>To</Table.HeaderCell>
+              <Table.HeaderCell>Number</Table.HeaderCell>
               <Table.HeaderCell>
                 Status
-                <InvoiceListIcon
-                  toggleSort={this.toggleSort}
-                  currentSort={current_sort}
+                <Icon
+                  onClick={this.toggleSort}
+                  name={`angle ${
+                    current_sort === "paid_first" ? "down" : "up"
+                  }`}
+                  style={{ cursor: "pointer", marginLeft: "2%" }}
                 />
               </Table.HeaderCell>
-              <Table.HeaderCell>Date Due</Table.HeaderCell>
-              <Table.HeaderCell>Date Paid</Table.HeaderCell>
-              <Table.HeaderCell>Description</Table.HeaderCell>
-              <Table.HeaderCell>Amount Due</Table.HeaderCell>
+              <Table.HeaderCell>Bill From</Table.HeaderCell>
+              <Table.HeaderCell>Bill To</Table.HeaderCell>
+              <Table.HeaderCell>Total Cost</Table.HeaderCell>
               <Table.HeaderCell>Edit Invoice</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -113,4 +116,20 @@ class InvoiceList extends React.Component {
   }
 }
 
-export default InvoiceList;
+InvoiceList.propTypes = {
+  token: PropTypes.string.isRequired,
+  response: PropTypes.array.isRequired,
+  initialise: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => {
+  return {
+    response: state.invoices.invoices,
+    token: state.authToken
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { initialise, fetchInvoices }
+)(InvoiceList);

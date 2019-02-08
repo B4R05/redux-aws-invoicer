@@ -1,0 +1,9 @@
+.sign-form input {
+  color: lightgray !important;
+}
+
+.sign-form {
+  margin: 15vh auto !important;
+  width: 450px;
+  padding: 45px !important;
+}

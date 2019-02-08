@@ -5,7 +5,7 @@ import { Button } from "semantic-ui-react";
 
 const HeaderLink = ({ to, location, color }) => {
   return (
-    <Button inverted color={color} as={Link} to={to}>
+    <Button color={color} as={Link} to={to}>
       {location}
     </Button>
   );
@@ -13,7 +13,8 @@ const HeaderLink = ({ to, location, color }) => {
 
 HeaderLink.propTypes = {
   to: PropTypes.string.isRequired,
-  location: PropTypes.string
+  location: PropTypes.string,
+  color: PropTypes.string
 };
 
 export default HeaderLink;

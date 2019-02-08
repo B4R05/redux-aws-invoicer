@@ -58,20 +58,26 @@ class SignUpFormStep2 extends React.Component {
 
     cognitoUser.authenticateUser(authDetails, {
       onSuccess: result => {
-        console.log(result);
-
-        setTimeout(() => {
-          this.props.history.push("/");
-        }, 200);
+        return this.handleAuthenticationSuccess(result);
       },
       onFailure: err => {
-        this.setState({ loading: false, error: err.message });
-        console.log(err);
+        return this.handleAuthenticationFailure(err);
       }
     });
   };
 
-  showMessage = () => {
+  handleAuthenticationSuccess = result => {
+    console.log(result);
+    setTimeout(() => {
+      this.props.history.push("/");
+    }, 200);
+  };
+  handleAuthenticationFailure = err => {
+    this.setState({ loading: false, error: err.message });
+    console.log(err);
+  };
+
+  showErrorMessage = () => {
     if (this.state.error) {
       return <Message negative>{this.state.error}</Message>;
     }
@@ -81,7 +87,7 @@ class SignUpFormStep2 extends React.Component {
     let { loading } = this.state;
 
     return (
-      <Segment inverted className="signup-form fade">
+      <Segment inverted className="sign-form fade">
         <Header as="h5" textAlign="center" color="grey">
           Step 2: Enter the code received by email
         </Header>
@@ -103,7 +109,7 @@ class SignUpFormStep2 extends React.Component {
           </Form.Field>
           <Button loading={loading ? true : false}>Confirm account</Button>
         </Form>
-        {this.showMessage()}
+        {this.showErrorMessage()}
       </Segment>
     );
   }

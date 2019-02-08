@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import { userPool } from "../../config";
+import { getToken } from "../../actions/index";
+import { connect } from "react-redux";
+
 import {
   Button,
   Form,
@@ -10,7 +13,7 @@ import {
   Header,
   Message
 } from "semantic-ui-react";
-import "../../styles/SignInForm.css";
+import "../../styles/SignForm.css";
 
 class SignInForm extends React.Component {
   state = {
@@ -20,7 +23,7 @@ class SignInForm extends React.Component {
   };
 
   componentDidMount() {
-    if (userPool.getCurrentUser()) {
+    if (this.props.token.length) {
       this.props.history.push("/");
     }
   }
@@ -42,27 +45,35 @@ class SignInForm extends React.Component {
         Username: this.state.username,
         Password: this.state.password
       };
-
       const authDetails = new AuthenticationDetails(authData);
       const userData = {
         Username: this.state.username,
         Pool: userPool
       };
       const cognitoUser = new CognitoUser(userData);
+
       cognitoUser.authenticateUser(authDetails, {
         onSuccess: result => {
-          console.log(result);
-
-          setTimeout(() => {
-            this.props.history.push("/");
-          }, 200);
+          this.handleLoginSuccess(result);
         },
         onFailure: err => {
-          this.setState({ loading: false, error: err.message });
-          console.log(err);
+          this.handleLoginFailure(err);
         }
       });
     }
+  };
+
+  handleLoginSuccess = result => {
+    console.log(result);
+    this.props.getToken(result.idToken.jwtToken);
+    setTimeout(() => {
+      this.props.history.push("/");
+    }, 200);
+  };
+
+  handleLoginFailure = err => {
+    this.setState({ loading: false, error: err.message });
+    console.log(err);
   };
 
   showMessage = () => {
@@ -75,7 +86,7 @@ class SignInForm extends React.Component {
     const { loading } = this.state;
     return (
       <Container>
-        <Segment inverted className="signin-form fade">
+        <Segment inverted className="sign-form fade">
           <Header as="h2" textAlign="center">
             Sign In
           </Header>
@@ -108,4 +119,14 @@ class SignInForm extends React.Component {
     );
   }
 }
-export default SignInForm;
+
+const mapStateToProps = state => {
+  return {
+    token: state.authToken
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getToken }
+)(SignInForm);
