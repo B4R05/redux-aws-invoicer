@@ -31,12 +31,6 @@ All invoices are sorted by their order status and each invoice can have the pric
 - Fetch, create and edit invoices
 - Sort invoices by their order status
 
-### Future Features:
-
-- Settings feature for each user including account, details and preferences handling
-- Premium users will be allowed to send invoices while non-premium users can only receive invoices
-- More detailed and relevently charted dashboard
-
 ### Live Demo: 
 
 https://invoicer-c6c19.firebaseapp.com
@@ -45,6 +39,15 @@ https://invoicer-c6c19.firebaseapp.com
 ### Preview:
 
 ![](demo.gif)
+
+
+### Future Features:
+
+- Settings feature for each user including account, details and preferences handling
+- Premium users will be allowed to send invoices while non-premium users can only receive invoices
+- More detailed and relevently charted dashboard
+
+
 
 
 
