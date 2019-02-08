@@ -1,7 +1,9 @@
 # Introduction
 
 > Create, list and edit your invoices with this simple React app
+
 > More features to be added
+
 > This is a practice project for me, feel free to use it as you wish
 
 ![](https://img.shields.io/github/last-commit/GavBaros/redux-aws-invoicer.svg?style=flat)
