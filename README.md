@@ -37,14 +37,15 @@ All invoices are sorted by their order status and each invoice can have the pric
 - Premium users will be allowed to send invoices while non-premium users can only receive invoices
 - More detailed and relevently charted dashboard
 
+### Live Demo: 
+
+https://invoicer-c6c19.firebaseapp.com
+
+
 ### Preview:
 
 ![](demo.gif)
 
-
-### Live Demo: 
-
-https://invoicer-c6c19.firebaseapp.com
 
 
 # Technologies
@@ -54,7 +55,7 @@ https://invoicer-c6c19.firebaseapp.com
 - Redux
 - Redux Form
 - Redux Thunk
-- Semantic Ui React
+- Semantic UI React
 
 ## Backend
 - API Gateway
