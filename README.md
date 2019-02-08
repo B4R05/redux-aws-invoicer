@@ -7,7 +7,7 @@
 ![](https://img.shields.io/github/last-commit/GavBaros/redux-aws-invoicer.svg?style=flat)
 ![](https://img.shields.io/github/repo-size/GavBaros/redux-aws-invoicer.svg?style=flat)
 ![](https://img.shields.io/david/GavBaros/redux-aws-invoicer.svg?style=flat)
-[![License](http://img.shields.io/:license-mit-blue.svg?)
+![License](http://img.shields.io/:license-mit-blue.svg?)
 
 ## Table of Contents
 
