@@ -44,6 +44,7 @@ https://invoicer-c6c19.firebaseapp.com
 ### Future Features:
 
 - Settings feature for each user including account, details and preferences handling
+- Live notifications with sockets
 - Premium users will be allowed to send invoices while non-premium users can only receive invoices
 - More detailed and relevently charted dashboard
 
